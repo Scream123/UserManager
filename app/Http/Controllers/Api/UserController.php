@@ -10,7 +10,6 @@ use App\Http\Requests\ShowUserRequest;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\Token;
-use App\Services\TinyPngService;
 use App\Services\UserService;
 use Illuminate\Http\JsonResponse;
 
@@ -26,8 +25,9 @@ class UserController extends Controller
     public function index(ListUserRequest $request): JsonResponse
     {
         $validatedData = $request->validated();
-
-        $users = $this->userService->listUsers($validatedData['count'] ?? 6);
+        $count = isset($validatedData['count']) ? (int)$validatedData['count'] : 5;
+        $page = isset($validatedData['page']) ? (int)$validatedData['page'] : 1;
+        $users = $this->userService->listUsers($count, $page);
 
         return response()->json([
             'success' => true,

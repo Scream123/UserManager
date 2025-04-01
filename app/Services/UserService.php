@@ -18,11 +18,9 @@ class UserService
         $this->tinyPngService = $tinyPngService;
     }
 
-    public function listUsers(string $limit = null): LengthAwarePaginator
+    public function listUsers(int $limit, int $page): LengthAwarePaginator
     {
-        $limit = $limit ?? User::count();
-
-        return User::OrderBy('created_at', 'desc')->paginate($limit);
+        return User::OrderBy('created_at', 'desc')->paginate($limit,['*'], 'page', $page);
     }
 
     public function createUser(array $data): User
