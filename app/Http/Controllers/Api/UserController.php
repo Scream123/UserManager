@@ -52,7 +52,7 @@ class UserController extends Controller
             return response()->json(['success' => false, 'message' => 'Token not found'], 401);
         }
 
-        $tokenValue = substr($authHeader, 7); // Delete "Bearer "
+        $tokenValue = substr($authHeader, 7);
 
         $token = Token::where('token', $tokenValue)->where('used', false)->first();
 
