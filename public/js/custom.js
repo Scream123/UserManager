@@ -146,7 +146,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 .then(data => {
                     if (data.success && data.token) {
                         localStorage.setItem('authToken', data.token);
-                        tokenMessage.textContent = 'Token generated: ';
+                        tokenMessage.textContent = 'Token generated ';
                         tokenMessage.classList.remove('d-none');
                     } else {
                         tokenMessage.textContent = 'ERROR: ' + data.message;
